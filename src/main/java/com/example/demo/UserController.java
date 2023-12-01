@@ -23,13 +23,13 @@ public class UserController {
         return "success";
     }
 
-    @GetMapping("/findGameIdByUserId")
+    @GetMapping("/findPlayerNameByUserId")
     @ResponseBody
     @CrossOrigin(origins = "*")
-    public String findGameIdByUserId(@RequestParam String userId){
+    public String findPlayerNameByUserId(@RequestParam String userId){
         Optional<User> user = this.userRepository.findById(userId);
         if (user.isPresent()) {
-            return user.get().getGameId();
+            return user.get().getPlayerName();
         }
         return "";
     }

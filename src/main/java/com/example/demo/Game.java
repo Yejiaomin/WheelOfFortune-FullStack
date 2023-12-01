@@ -10,13 +10,13 @@ public class Game {
     @Id
     Long id;
     String userId;
-    String gameId;
+    String playerName;
     int score;
     LocalDate date;
 
-    public Game(String userId, String gameId, int score, LocalDate date) {
+    public Game(String userId, String playerName, int score, LocalDate date) {
         this.userId = userId;
-        this.gameId = gameId;
+        this.playerName = playerName;
         this.score = score;
         this.date = date;
     }
@@ -37,12 +37,12 @@ public class Game {
         return date;
     }
 
-    public String getGameId() {
-        return gameId;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public void setDate(LocalDate date) {
@@ -66,7 +66,7 @@ public class Game {
         return "Game{" +
                 "id=" + id +
                 ", userId='" + userId + '\'' +
-                ", gameId='" + gameId + '\'' +
+                ", playerName='" + playerName + '\'' +
                 ", score=" + score +
                 ", date=" + date +
                 '}';

@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,23 +32,18 @@ public class GameController {
     @GetMapping("/findAllGames")
     @ResponseBody
     @CrossOrigin(origins = "*")
-    public List<Game> findAllGames() {
-        Iterable<Game> games = this.gameRepository.findAll(Sort.by("score").descending());
-        List<Game> gameList = new ArrayList<>();
-        for (Game game: games) {
-            gameList.add(game);
-        }
-        return gameList;
+    public List<Game> findAllGames(@RequestParam int page, @RequestParam int size) {
+        PageRequest pageable = PageRequest.of(page, size);
+        return gameRepository.findAllByOrderByScoreDesc(pageable).toList();
     }
+
+
     @GetMapping("/findGameByUserId")
     @ResponseBody
     @CrossOrigin(origins = "*")
-    public List<Game> findByUserId(@RequestParam String userId){
-        Iterable<Game> games = this.gameRepository.findByUserId(userId);
-        List<Game> gameList = new ArrayList<>();
-        games.forEach(gameList::add);
-        gameList.sort(Comparator.comparingInt(Game::getScore).reversed());
-        return gameList;
+    public List<Game> findGameByUserId(@RequestParam String userId, @RequestParam int page, @RequestParam int size){
+        PageRequest pageable = PageRequest.of(page, size);
+        return this.gameRepository.findAllByUserIdOrderByScoreDesc(userId,pageable).toList();
     }
 
     @GetMapping("/deleteGameById")
@@ -57,5 +54,15 @@ public class GameController {
         return "success";
     }
 
+    @GetMapping("/updatePlayerNameByUserId")
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    public void updatePlayerNameByUserId(@RequestParam String userId, @RequestParam String newPlayerName){
+        Iterable<Game> games = this.gameRepository.findByUserId(userId);
+        for(Game game: games){
+            game.setPlayerName(newPlayerName);
+        }
+        this.gameRepository.saveAll(games);
+    }
 
 }

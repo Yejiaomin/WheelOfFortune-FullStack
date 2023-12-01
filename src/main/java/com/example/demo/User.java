@@ -7,11 +7,11 @@ import org.springframework.data.annotation.Id;
 public class User {
     @Id
     String userId;
-    String gameId;
+    String playerName;
 
-    public User(String userId, String gameId) {
+    public User(String userId, String playerName) {
         this.userId = userId;
-        this.gameId = gameId;
+        this.playerName = playerName;
     }
 
     public String getUserId() {
@@ -22,19 +22,19 @@ public class User {
         this.userId = userId;
     }
 
-    public String getGameId() {
-        return gameId;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 ", userId='" + userId + '\'' +
-                ", gameId='" + gameId + '\'' +
+                ", playerName='" + playerName + '\'' +
                 '}';
     }
 }
