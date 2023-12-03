@@ -9,8 +9,13 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public interface GameRepository extends PagingAndSortingRepository<Game, Long >, DatastoreRepository<Game, Long > {
+
+    // Find all games with pagination and sorting by score in descending order
     Page<Game> findAllByOrderByScoreDesc(Pageable pageable);
+
+    // Find games by user ID with pagination and sorting by score in descending order
     Page<Game> findAllByUserIdOrderByScoreDesc(String userId, Pageable pageable);
 
+    // Find games by user ID without pagination
     List<Game> findByUserId(String userId);
 }

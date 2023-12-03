@@ -5,21 +5,25 @@ import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 
+//Entity annotation to mark this class as a Datastore entity
 @Entity(name = "games")
 public class Game {
     @Id
-    Long id;
-    String userId;
-    String playerName;
-    int score;
-    LocalDate date;
+    Long id; //Unique identifier for the game
+    String userId; //User ID associated with the game
+    String playerName; //Player name associated with the game
+    int score; //Score achieved in the game
+    LocalDate date; //Date when the game wa played
 
+    // Constructor to initialize a game with user ID, player name, score, and date
     public Game(String userId, String playerName, int score, LocalDate date) {
         this.userId = userId;
         this.playerName = playerName;
         this.score = score;
         this.date = date;
     }
+
+    // Getter and setter methods for each field
 
     public Long getId() {
         return id;
@@ -61,6 +65,7 @@ public class Game {
         this.score = score;
     }
 
+    // toString method to provide a string representation of the Game object
     @Override
     public String toString() {
         return "Game{" +
